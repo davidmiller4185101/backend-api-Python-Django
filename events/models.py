@@ -72,7 +72,7 @@ class UserInfo(models.Model):
 
 
 class Contact(models.Model):
-    owner = models.ForeignKey(User)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='friend', on_delete=models.CASCADE)
     invitation_send = models.BooleanField()
     invitation_accepted = models.BooleanField()
