@@ -24,9 +24,9 @@ from rest_framework.documentation import include_docs_urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include_docs_urls(title='agenda API')),
-    url(r'^api/auth/', include('authentication.api.urls', namespace='api-auth')),
-    url(r'^api/events/', include('events.api.urls', namespace='api-events')),
-    url(r'^api/news/', include('news.api.urls', namespace='api-news')),
+    url(r'^api/auth/', include(('authentication.api.urls', 'authentication'), namespace='api-auth')),
+    url(r'^api/events/', include(('events.api.urls', 'events'), namespace='api-events')),
+    url(r'^api/news/', include(('news.api.urls', 'news'), namespace='api-news')),
 ]
 
 if settings.DEBUG:
