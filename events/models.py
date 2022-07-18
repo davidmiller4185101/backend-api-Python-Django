@@ -76,7 +76,7 @@ class Contact(models.Model):
     user = models.ForeignKey(User, related_name='friend', on_delete=models.CASCADE)
     invitation_send = models.BooleanField()
     invitation_accepted = models.BooleanField()
-    optional_informations = models.OneToOneField(UserInfo, blank=True, null=True)
+    optional_informations = models.OneToOneField(UserInfo, blank=True, null=True, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         super(Contact, self).save(*args, **kwargs)
