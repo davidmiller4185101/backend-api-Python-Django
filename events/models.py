@@ -32,8 +32,8 @@ class EventGuest(models.Model):
         (2, _('Desisted')),
         (3, _('Confirmed')),
     )
-    event = models.ForeignKey(Event)
-    guest = models.ForeignKey(User)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    guest = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.IntegerField(choices=status_choices)
 
     class Meta:
@@ -45,7 +45,7 @@ class EventGuest(models.Model):
 
 class Circle(models.Model):
     name = models.CharField(max_length=250)
-    owner = models.ForeignKey(User)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def contacts(self):
         return self.userinfo_set.all()
@@ -73,7 +73,7 @@ class UserInfo(models.Model):
 
 class Contact(models.Model):
     owner = models.ForeignKey(User)
-    user = models.ForeignKey(User, related_name='friend')
+    user = models.ForeignKey(User, related_name='friend', on_delete=models.CASCADE)
     invitation_send = models.BooleanField()
     invitation_accepted = models.BooleanField()
     optional_informations = models.OneToOneField(UserInfo, blank=True, null=True)
@@ -106,7 +106,7 @@ class Contact(models.Model):
 
 class Invitation(models.Model):
     email = models.EmailField()
-    sender = models.ForeignKey(User)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ('email', 'sender')
